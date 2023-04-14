@@ -42,48 +42,26 @@ export default function ProductDetail(props) {
 }
 
 // SSG
-// export async function getStaticPaths() {
-//   return {
-//     paths: [],
-//     fallback: true,
-//   }
-// }
+export async function getStaticPaths() {
+  return {
+    paths: [],
+    fallback: true,
+  }
+}
 
-// export async function getStaticProps(content) {
-//   try {
-//     const { params, query } = content;
-//     console.log('««««« content »»»»»', content);
-//     console.log('««««« params »»»»»', params);
-//     console.log('««««« query »»»»»', query);
-//     const response = await fetch('http://localhost:9000/products');
-//     const products = await response.json();
-
-//     return {
-//       props: {
-//         products,
-//       },
-//       revalidate: 5,
-//     };
-//   } catch (error) {
-//     return {
-//       notFound: true,
-//     };
-//   }
-// }
-
-
-// SSR
-export async function getServerSideProps(req) {
+export async function getStaticProps(content) {
   try {
-    const { params, query } = req;
-    console.log('««««« req »»»»»', req);
-    const response = await fetch('http://localhost:9000/products');
-    const products = await response.json();
+    const { params, query } = content;
+    console.log('««««« content »»»»»', content);
+    console.log('««««« params »»»»»', params);
+    console.log('««««« query »»»»»', query);
+    const response = await axios.get('http://localhost:9000/products');
 
     return {
       props: {
-        products,
+        products: response.data,
       },
+      revalidate: 5,
     };
   } catch (error) {
     return {
@@ -91,3 +69,23 @@ export async function getServerSideProps(req) {
     };
   }
 }
+
+
+// SSR
+// export async function getServerSideProps(req) {
+//   try {
+//     const { params, query } = req;
+//     // console.log('««««« req »»»»»', req);
+//     const response = await axios.get('http://localhost:9000/products');
+
+//     return {
+//       props: {
+//         products: response.data,
+//       },
+//     };
+//   } catch (error) {
+//     return {
+//       notFound: true,
+//     };
+//   }
+// }
