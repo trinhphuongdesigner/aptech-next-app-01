@@ -34,6 +34,23 @@ export default function ProductDetail(props) {
 }
 
 // SSG
+// export async function getStaticPaths() {
+//   try {
+//     const response = await axiosClient.get('/products');
+
+//     const paths = response.data.map((post) => ({
+//       params: { id: post.id },
+//     }))
+
+//     return {
+//       paths,
+//       fallback: true,
+//     }
+//   } catch (error) {
+//     console.log('««««« error »»»»»', error);
+//   }
+// }
+
 export async function getStaticPaths() {
   return {
     paths: [],
@@ -50,7 +67,7 @@ export async function getStaticProps(req) {
       props: {
         product: response.data.result,
       },
-      revalidate: 5,
+      // revalidate: 10,
     };
   } catch (error) {
     return {

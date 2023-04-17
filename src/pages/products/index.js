@@ -3,6 +3,7 @@ import Link from "next/link";
 import Head from "next/head";
 
 import axiosClient from "../../libraries/axiosClient";
+import axios from "axios";
 
 export default function ProductDetail(props) {
   const { products } = props;
@@ -31,14 +32,6 @@ export default function ProductDetail(props) {
   );
 }
 
-// SSG
-// export async function getStaticPaths() {
-//   return {
-//     paths: [],
-//     fallback: true,
-//   }
-// }
-
 export async function getStaticProps(content) {
   try {
     const response = await axiosClient.get('/products');
@@ -47,7 +40,8 @@ export async function getStaticProps(content) {
       props: {
         products: response.data,
       },
-      revalidate: 5,
+
+      revalidate: 24 * 60 * 60
     };
   } catch (error) {
     return {
