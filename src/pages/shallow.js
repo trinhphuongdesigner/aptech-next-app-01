@@ -35,6 +35,7 @@ export default function Index(props) {
   };
 
   useEffect(() => {
+    // setList();
     console.log('««««« counter »»»»»', query.counter);
   }, [query.counter]);
 
