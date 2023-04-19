@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import axiosClient from "../../libraries/axiosClient";
 
 function ProductDetail(props) {
-  const { product } = props;
+  const { post } = props;
 
   return (
     <>
@@ -16,32 +16,32 @@ function ProductDetail(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {product && (
+      {post && (
         <main>
           <p>
-            <strong>Name:</strong> {product.name}
+            <strong>title:</strong> {post.title}
           </p>
           <p>
-            <strong>Price:</strong> {product.price}
+            <strong>body:</strong> {post.body}
           </p>
           <p>
-            <strong>Stock:</strong> {product.stock}
+            <strong>userId:</strong> {post.userId}
+          </p>
+          {/* <p>
+            <strong>Discount:</strong> {post.discount}%
           </p>
           <p>
-            <strong>Discount:</strong> {product.discount}%
+            <strong>Total:</strong> {post.total}
           </p>
           <p>
-            <strong>Total:</strong> {product.total}
+            <strong>Supplier name :</strong> {post.supplier.name}
           </p>
           <p>
-            <strong>Supplier name :</strong> {product.supplier.name}
+            <strong>Supplier email :</strong> {post.supplier.email}
           </p>
           <p>
-            <strong>Supplier email :</strong> {product.supplier.email}
-          </p>
-          <p>
-            <strong>Supplier address :</strong> {product.supplier.address}
-          </p>
+            <strong>Supplier address :</strong> {post.supplier.address}
+          </p> */}
         </main>
       )}
     </>
@@ -49,11 +49,11 @@ function ProductDetail(props) {
 }
 
 ProductDetail.propTypes = {
-  product: PropTypes.instanceOf(Object),
+  post: PropTypes.instanceOf(Object),
 };
 
 ProductDetail.defaultProps = {
-  product: {},
+  post: {},
 };
 
 export default ProductDetail;
@@ -86,11 +86,11 @@ export async function getStaticPaths() {
 export async function getStaticProps(req) {
   try {
     const { params } = req;
-    const response = await axiosClient.get(`/products/${params.id}`);
+    const response = await axiosClient.get(`/posts/${params.id}`);
 
     return {
       props: {
-        product: response.data.result,
+        post: response.data,
       },
       // revalidate: 10,
     };
