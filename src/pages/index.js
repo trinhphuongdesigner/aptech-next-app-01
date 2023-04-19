@@ -1,8 +1,9 @@
-import Link from 'next/link';
-import { useRouter } from 'next/router';
+import React from "react";
 import { Inter } from "next/font/google";
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 import styles from "@/styles/Home.module.css";
 
@@ -27,16 +28,22 @@ export default function Home() {
             <code className={styles.code}>src/pages/index.js</code>
           </p>
 
-          <Link href='/about?status=PENDING'><h1>About</h1></Link>
+          <Link href="/about?status=PENDING">
+            <h1>About</h1>
+          </Link>
 
-          <Link href={{
-            pathname: '/about',
-            query: { status: 'PENDING' },
-          }}>
+          <Link
+            href={{
+              pathname: "/about",
+              query: { status: "PENDING" },
+            }}
+          >
             <h1>About object</h1>
           </Link>
 
-          <button onClick={() => router.push('/about')}>CLick</button>
+          <button type="button" onClick={() => router.push("/about")}>
+            Click
+          </button>
           <div>
             <a
               href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"

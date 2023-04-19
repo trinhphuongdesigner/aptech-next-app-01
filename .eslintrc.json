@@ -12,8 +12,8 @@
     "plugin:react-hooks/recommended",
     "airbnb",
     "plugin:import/recommended",
-    // "plugin:prettier/recommended",
-    // "prettier"
+    "plugin:prettier/recommended",
+    "prettier"
   ],
   "overrides": [
     // override "simple-import-sort" config

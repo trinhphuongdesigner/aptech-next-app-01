@@ -1,4 +1,4 @@
-import { Inter } from "next/font/google";
+import React from "react";
 import Head from "next/head";
 
 import AboutComponent from "@/components/about";

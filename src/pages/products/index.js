@@ -1,11 +1,11 @@
 import React from "react";
-import Link from "next/link";
 import Head from "next/head";
+import Link from "next/link";
+import PropTypes from "prop-types";
 
 import axiosClient from "../../libraries/axiosClient";
-import axios from "axios";
 
-export default function ProductDetail(props) {
+function Products(props) {
   const { products } = props;
 
   return (
@@ -18,30 +18,39 @@ export default function ProductDetail(props) {
       </Head>
 
       <ul>
-        {
-          products?.length > 0 && (
-            products.map((item, idx) => <li key={item._id} className="mb-2">
+        {products?.length > 0 &&
+          products.map((item, idx) => (
+            <li key={item._id} className="mb-2">
               <Link href={`/products/${item._id}`}>
                 <strong>{`${idx + 1}: ${item.name}`}</strong>
               </Link>
-            </li>)
-          )
-        }
+            </li>
+          ))}
       </ul>
     </>
   );
 }
 
-export async function getStaticProps(content) {
+Products.propTypes = {
+  products: PropTypes.instanceOf(Array),
+};
+
+Products.defaultProps = {
+  products: [],
+};
+
+export default Products;
+
+export async function getStaticProps() {
   try {
-    const response = await axiosClient.get('/products');
+    const response = await axiosClient.get("/products");
 
     return {
       props: {
         products: response.data,
       },
 
-      revalidate: 24 * 60 * 60
+      revalidate: 24 * 60 * 60,
     };
   } catch (error) {
     return {

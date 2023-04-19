@@ -1,8 +1,10 @@
+import React from "react";
 import Head from "next/head";
+import PropTypes from "prop-types";
 
 import axiosClient from "../../libraries/axiosClient";
 
-export default function ProductDetail(props) {
+function ProductDetail(props) {
   const { product } = props;
 
   return (
@@ -13,25 +15,48 @@ export default function ProductDetail(props) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      
-      {
-        product && (
-          <main>
-            <p><strong>Name:</strong> {product.name}</p>
-            <p><strong>Price:</strong> {product.price}</p>
-            <p><strong>Stock:</strong> {product.stock}</p>
-            <p><strong>Discount:</strong> {product.discount}%</p>
-            <p><strong>Total:</strong> {product.total}</p>
-            <p><strong>Supplier name :</strong> {product.supplier.name}</p>
-            <p><strong>Supplier email :</strong> {product.supplier.email}</p>
-            <p><strong>Supplier address :</strong> {product.supplier.address}</p>
-          </main>
-        )
-      }
 
+      {product && (
+        <main>
+          <p>
+            <strong>Name:</strong> {product.name}
+          </p>
+          <p>
+            <strong>Price:</strong> {product.price}
+          </p>
+          <p>
+            <strong>Stock:</strong> {product.stock}
+          </p>
+          <p>
+            <strong>Discount:</strong> {product.discount}%
+          </p>
+          <p>
+            <strong>Total:</strong> {product.total}
+          </p>
+          <p>
+            <strong>Supplier name :</strong> {product.supplier.name}
+          </p>
+          <p>
+            <strong>Supplier email :</strong> {product.supplier.email}
+          </p>
+          <p>
+            <strong>Supplier address :</strong> {product.supplier.address}
+          </p>
+        </main>
+      )}
     </>
   );
 }
+
+ProductDetail.propTypes = {
+  product: PropTypes.instanceOf(Object),
+};
+
+ProductDetail.defaultProps = {
+  product: {},
+};
+
+export default ProductDetail;
 
 // SSG
 // export async function getStaticPaths() {
@@ -55,7 +80,7 @@ export async function getStaticPaths() {
   return {
     paths: [],
     fallback: true,
-  }
+  };
 }
 
 export async function getStaticProps(req) {
@@ -75,7 +100,6 @@ export async function getStaticProps(req) {
     };
   }
 }
-
 
 // SSR
 // export async function getServerSideProps(req) {

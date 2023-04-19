@@ -1,18 +1,19 @@
-import { useRouter } from 'next/router'
-import Link from 'next/link';
-import { format } from 'url';
-import { useEffect } from 'react';
+/* eslint-disable */
+import { useEffect } from "react";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { format } from "url";
 
-let counter = 0
+let counter = 0;
 
 export async function getServerSideProps() {
-  counter++
+  counter++;
 
   return {
     props: {
       initialPropsCounter: counter,
     },
-  }
+  };
 }
 
 export default function Index(props) {
@@ -23,20 +24,21 @@ export default function Index(props) {
   const { pathname, query } = router;
 
   const reload = () => {
-    router.push(format({ pathname, query }))
+    router.push(format({ pathname, query }));
   };
 
   const incrementCounter = () => {
+    // eslint-disable-next-line radix
     const currentCounter = query.counter ? parseInt(query.counter) : 0;
 
     const href = `/shallow/?counter=${currentCounter + 1}`;
 
-    router.push(href, href, { shallow: true })
+    router.push(href, href, { shallow: true });
   };
 
   useEffect(() => {
     // setList();
-    console.log('««««« counter »»»»»', query.counter);
+    console.log("««««« counter »»»»»", query.counter);
   }, [query.counter]);
 
   return (
@@ -53,5 +55,5 @@ export default function Index(props) {
 
       <p>Counter: "{query.counter || 0}".</p>
     </div>
-  )
+  );
 }
